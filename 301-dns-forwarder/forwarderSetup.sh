@@ -1,8 +1,12 @@
+
+
+
+********************** forwarderSetup.sh
 #!/bin/sh
 #
 #  only doing all the sudos as cloud-init doesn't run as root, likely better to use Azure VM Extensions
 #
-#  $1 is the forwarder, $2 is the vnet IP range
+#  $1 is the forwarder, $2 is the vnet IP range, $3 PLAMEN ADDED FOR VPN CLIENT IPs
 #
 
 touch /tmp/forwarderSetup_start
@@ -17,6 +21,7 @@ sudo apt-get install bind9 -y
 sudo cat > named.conf.options << EndOFNamedConfOptions
 acl goodclients {
     $2;
+	$3;
     localhost;
     localnets;
 };
